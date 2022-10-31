@@ -82,6 +82,7 @@ function rockPaperScissors (playerChoice, computerChoice) {
  */
 function game (rounds) {
     let playerChoice;
+    let computerChoice;
     let result;
     for (let i = 0; i < rounds; i++) {
         playerChoice = prompt("Enter your choice: (rock, paper or scissors)");
