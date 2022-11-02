@@ -10,9 +10,16 @@ const RESULT = {
     LOSS: "You lose!"
 }
 
+const buttonRock = document.getElementById("rock");
+const buttonPaper = document.getElementById("paper");
+const buttonScissors = document.getElementById("scissors");
+const scoreBoard = document.getElementById("score-board");
+
+let playerScore = 0;
+let computerScore = 0;
 
 /**
- * Generates a number between 1 and 3 (included) and returns enum string with an RPS choice
+ * Generates a number between 1 and 3 (included) and returns enum string with an RPS choice (rock, paper or scissors)
  * 
  * @returns {string}
  */
@@ -76,26 +83,60 @@ function rockPaperScissors (playerChoice, computerChoice) {
 }
 
 /**
- * Plays the specified number of RPS games in a row including asking the player for his choice
+ * Adjusts score based on the result string
  * 
- * @param {number} rounds number of rounds to be played
+ * @param {string} result 
  */
-function game (rounds) {
-    let playerChoice;
-    let computerChoice;
-    let result;
-    for (let i = 0; i < rounds; i++) {
-        playerChoice = prompt("Enter your choice: (rock, paper or scissors)");
-        computerChoice = getComputerChoice();
-        result = rockPaperScissors(playerChoice, computerChoice);
-        if (result) {
-            console.log(`${result} - Your choice: ${playerChoice} - Computer choice: ${computerChoice}`);
+function evaluateResult (result) {
+    if (result) {
+        if (result === RESULT.WIN) {
+            playerScore++;
+        } 
+        else if (result === RESULT.LOSS) {
+            computerScore++;
         }
-        else {
-            console.log("Your choice is invalid, try again.");
-            i--;
-        }
+    }
+    else {
+        console.log("Error - result is null");
     }
 }
 
-game(5);
+/**
+ * Checks if any of the players reached the desired score
+ * 
+ * @returns true if the game has ended or false if the game is still ongoing
+ */
+function isGameEnd() {
+    if (playerScore === 5 || computerScore === 5) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+/**
+ * Plays one round of Rock Paper Scissors
+ * Get player input based on the button pressed
+ * 
+ */
+function game () {
+    let playerChoice = this.id;
+    let computerChoice;
+    let result;
+    computerChoice = getComputerChoice();
+    result = rockPaperScissors(playerChoice, computerChoice);
+    evaluateResult(result);
+    if (isGameEnd()) {
+        scoreBoard.textContent = `The game has officially ended!\n\nFinal scores are:\n\nPLAYER: ${playerScore} - CPU: ${computerScore}`;
+        playerScore = 0;
+        computerScore = 0;
+    }
+    else {
+        scoreBoard.textContent = `${result}\n\nYour choice: ${playerChoice}\n\nComputer choice: ${computerChoice}\n\nPLAYER:${playerScore} - CPU:${computerScore}`;
+    }
+}
+
+buttonRock.addEventListener('click', game);
+buttonPaper.addEventListener('click', game);
+buttonScissors.addEventListener('click', game);
