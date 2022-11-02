@@ -1,0 +1,41 @@
+* {
+    font-family: monospace;
+    color: white;
+}
+
+body {
+    background-color: lightgrey;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    background-color: darkgrey;
+    padding: 0.5em 2em;
+    border: 2px solid black;
+}
+
+.container {
+    height: 30vh;
+    display:flex;
+    align-items: center;
+    gap: 2em;
+}
+
+button {
+    font-size: 30px;
+    background-color: darkgrey;
+    border: 2px dotted black;
+    padding: 0.5em;
+}
+
+#score-board {
+    background-color: grey;
+    flex: 1 0 auto;
+    padding: 2em;
+    height: 30vh;
+    width: 30vw;
+    border: 2px solid black;
+}
