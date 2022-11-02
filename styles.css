@@ -32,10 +32,14 @@ button {
 }
 
 #score-board {
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
     background-color: grey;
     flex: 1 0 auto;
     padding: 2em;
     height: 30vh;
     width: 30vw;
     border: 2px solid black;
+    white-space: pre-wrap;
 }
